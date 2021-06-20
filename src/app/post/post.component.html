@@ -1,0 +1,91 @@
+<div class="card-left">
+  <h5>Create Post:</h5>
+  <form #postForm="ngForm" (ngSubmit)="onSubmit(postForm)">
+    <input
+      type="hidden"
+      name="_id"
+      #_id="ngModel"
+      [(ngModel)]="postService.selectedPost._id"
+    />
+    <div class="row">
+      <div class="input-field col s12">
+        <input
+          autofocus
+          type="text"
+          #name="ngModel"
+          name="userName"
+          [(ngModel)]="postService.selectedPost.userName"
+          required
+        />
+        <label>Username :</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input
+          autofocus
+          type="text"
+          name="postTitle"
+          #name="ngModel"
+          [(ngModel)]="postService.selectedPost.postTitle"
+          required
+        />
+        <label>Post Title:</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <textarea
+          autofocus
+          class="materialize-textarea"
+          type="text"
+          name="postBody"
+          #name="ngModel"
+          [(ngModel)]="postService.selectedPost.postBody"
+          required
+        >
+        </textarea>
+        <label>Post Message :</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <button class="btn btn-custom right" type="reset">Reset</button>
+        <button
+          class="btn btn-custom right"
+          type="submit"
+          [disabled]="!postForm.valid"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="card-right">
+  <h5>Bulletin Board:</h5>
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Post Title</th>
+        <th>Post</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tr *ngFor="let post of postService.posts">
+      <td>{{ post.userName }}</td>
+      <td>{{ post.postTitle }}</td>
+      <td>{{ post.postBody }}</td>
+      <td>
+        <a class="action-btn" (click)="onEdit(post)">
+          <i class="material-icons">edit</i>
+        </a>
+        <a class="action-btn" (click)="onDelete(post._id, postForm)">
+          <i class="material-icons">delete</i>
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>

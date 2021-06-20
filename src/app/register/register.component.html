@@ -1,0 +1,49 @@
+<div class="card-left">
+  <h5>Please Sign Up</h5>
+  <form
+    (submit)="onSignup(signupForm)"
+    class="login"
+    name="register"
+    #signupForm="ngForm"
+  >
+    <br />
+    <mat-form-field>
+      <input
+        matInput
+        style="color: #25a297"
+        type="email"
+        pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
+        ngModel
+        name="enteredEmail"
+        placeholder="Email Address"
+        required
+        #enteredEmail="ngModel"
+      />
+      <mat-error *ngIf="enteredEmail.invalid">{{
+        enteredEmailError
+      }}</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <input
+        matInput
+        style="color: #25a297"
+        type="password"
+        pattern="^([a-zA-Z0-9@*#]{8,15})$"
+        ngModel
+        name="enteredPassword"
+        placeholder="Password"
+        required
+        #enteredPassword="ngModel"
+      />
+      <mat-error *ngIf="enteredPassword.invalid">{{
+        enteredPasswordError
+      }}</mat-error>
+    </mat-form-field>
+    <p></p>
+    <button class="btn btn-custom" type="reset">Reset</button>
+    <button class="btn btn-custom" type="submit" [disabled]="!signupForm.valid">
+      Register
+    </button>
+  </form>
+</div>
