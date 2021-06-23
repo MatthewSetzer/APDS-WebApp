@@ -1,0 +1,55 @@
+<div class="card-left-auth">
+  <h5>Please Sign Up</h5>
+<mat-card>
+  <form (submit)="onSignup(signupForm)"  class="login" name="signup" #signupForm="ngForm">
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        ngModel
+        name="enteredUserName"
+        placeholder="User Name"
+        required
+        minlength="8"
+        pattern="^[a-zA-Z0-9\s_-]+$"
+        #enteredUserName="ngModel"
+      />
+      <mat-error *ngIf="enteredUserName.invalid">{{enteredUserNameError}}</mat-error>
+    </mat-form-field>
+    <br>
+    <br>
+    <mat-form-field>
+      <input
+        matInput
+        type="email"
+        ngModel
+        name="enteredEmail"
+        placeholder="Email Address"
+        required
+        pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
+        #enteredEmail="ngModel"
+      />
+      <mat-error *ngIf="enteredEmail.invalid">{{enteredEmailError}}</mat-error>
+    </mat-form-field>
+    <br>
+    <br>
+    <mat-form-field>
+      <input
+        matInput
+        type="password"
+        ngModel
+        name="enteredPassword"
+        placeholder="Password"
+        required
+        pattern="^([a-zA-Z0-9@*#]{8,15})$"
+        #enteredPassword="ngModel"
+      />
+      <mat-error *ngIf="enteredPassword.invalid">{{enteredPasswordError}}</mat-error>
+    </mat-form-field>
+    <br>
+    <br>
+    <br>
+    <button  mat-raised-button type="submit">Sign Up</button>
+  </form>
+</mat-card>
+</div>

@@ -2,6 +2,7 @@ form div.input-field input {
   color: #25a297;
 }
 
+
 form div.input-field textarea {
   color: #25a297;
 }
@@ -48,6 +49,18 @@ div.card-left {
   padding: 20px;
   color: #fff;
 }
+
+div.card-left-auth {
+  background-color:lightslategrey;
+  border-radius: 10px;
+  float: left;
+  width: 30%;
+  margin-left: 50px;
+  margin-top: 50px;
+  padding: 20px;
+  color: #fff;
+}
+
 
 div.card-right {
   border-radius: 10px;

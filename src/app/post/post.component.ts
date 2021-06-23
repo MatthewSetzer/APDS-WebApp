@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SecurityContext } from '@angular/core';
 import { PostService } from '../shared/post.service';
 import { NgForm } from '@angular/forms';
 import { Post } from '../shared/post.model';
+import { DomSanitizer } from '@angular/platform-browser'
 
 declare var M: any;
 
@@ -13,7 +14,9 @@ declare var M: any;
 })
 export class PostComponent implements OnInit {
 
-  constructor(public postService: PostService) { }
+  output: string;
+
+  constructor(public postService: PostService, protected sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.resetForm();
@@ -33,6 +36,7 @@ export class PostComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     if (form.value._id == "") {
+      this.sanitizer.sanitize(SecurityContext.HTML, form.value.postBody);
       this.postService.savePost(form.value).subscribe((res) => {
         this.resetForm(form);
         this.refreshPostList();
