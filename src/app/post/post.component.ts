@@ -14,8 +14,6 @@ declare var M: any;
 })
 export class PostComponent implements OnInit {
 
-  output: string;
-
   constructor(public postService: PostService, protected sanitizer: DomSanitizer) { }
 
   ngOnInit() {
@@ -34,22 +32,33 @@ export class PostComponent implements OnInit {
     }
   }
 
+  logoutUser(){
+    localStorage.clear();
+  }
+
   onSubmit(form: NgForm) {
+
+    var x = localStorage.getItem("LoggedIn");
+    if(x != "true"){
+      M.toast({ html: 'Login First', classes: 'rounded' });
+      return;
+    }
+
     if (form.value._id == "") {
       this.sanitizer.sanitize(SecurityContext.HTML, form.value.postBody);
       this.postService.savePost(form.value).subscribe((res) => {
         this.resetForm(form);
-        this.refreshPostList();
         M.toast({ html: 'Saved Successfully', classes: 'rounded' });
       });
     }
     else {
       this.postService.putPost(form.value).subscribe((res) => {
         this.resetForm(form);
-        this.refreshPostList();
         M.toast({ html: 'Updated Post Successfully', classes: 'rounded' });
       });
     }
+
+    location.reload();
   }
 
   refreshPostList() {

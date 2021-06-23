@@ -45,7 +45,7 @@ export class AuthService
       this.token = token;
       console.log(response);
       this.dialog.open(SuccessComponent, {data:{message:response.message}});
-
+      localStorage.setItem("LoggedIn", "true");
     });
   }
 
